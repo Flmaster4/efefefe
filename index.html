@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бегущая строка</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+        
+        .marquee-container {
+            width: 100%;
+            padding: 20px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .marquee {
+            display: flex;
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+        }
+        
+        .marquee-text {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            padding: 12px 25px;
+            letter-spacing: 1px;
+            position: relative;
+            margin: 0 10px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.9), rgba(255, 165, 0, 0.9));
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .marquee-text::before {
+            content: "🎵";
+            margin-right: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .marquee-text::after {
+            content: "🎶";
+            margin-left: 15px;
+            font-size: 1.8rem;
+        }
+        
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        /* Эффект при наведении */
+        .marquee-container:hover .marquee-text {
+            background: linear-gradient(135deg, rgba(255, 165, 0, 0.9), rgba(255, 215, 0, 0.9));
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+            transform: scale(1.02);
+            transition: all 0.3s ease;
+        }
+        
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .marquee-text {
+                font-size: 1.5rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="marquee-container">
+        <div class="marquee">
+            <span class="marquee-text">Музыку можно заказать перейдя по ссылке в моем профиле</span>
+            <span class="marquee-text">Музыку можно заказать перейдя по ссылке в моем профиле</span>
+        </div>
+    </div>
+</body>
+</html>
