@@ -3,91 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бегущая строка</title>
+    <title>Игровые элементы</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: transparent;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
         }
         
-        .marquee-container {
+        .widget {
             width: 100%;
-            padding: 20px 0;
+            max-width: 1000px;
+            height: 50px;
+            background: transparent;
             overflow: hidden;
             position: relative;
+        }
+        
+        .marquee-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
         }
         
         .marquee {
             display: flex;
-            white-space: nowrap;
-            animation: marquee 25s linear infinite;
+            align-items: center;
+            height: 100%;
+            animation: marquee-scroll 30s linear infinite;
+            flex-shrink: 0;
         }
         
-        .marquee-text {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #fff;
-            padding: 12px 25px;
-            letter-spacing: 1px;
-            position: relative;
-            margin: 0 10px;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.9), rgba(255, 165, 0, 0.9));
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        .marquee:hover {
+            animation-play-state: paused;
+        }
+        
+        .item {
+            display: flex;
+            align-items: center;
+            margin-right: 25px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+            min-width: 160px;
+            height: 36px;
+            flex-shrink: 0;
             backdrop-filter: blur(5px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
         }
         
-        .marquee-text::before {
-            content: "🎵";
-            margin-right: 15px;
-            font-size: 1.8rem;
+        .item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
         }
         
-        .marquee-text::after {
-            content: "🎶";
-            margin-left: 15px;
-            font-size: 1.8rem;
+        .item-text {
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 12px;
+            white-space: nowrap;
         }
         
-        @keyframes marquee {
+        @keyframes marquee-scroll {
             0% {
-                transform: translateX(100%);
+                transform: translateX(0);
             }
             100% {
                 transform: translateX(-100%);
             }
         }
         
-        /* Эффект при наведении */
-        .marquee-container:hover .marquee-text {
-            background: linear-gradient(135deg, rgba(255, 165, 0, 0.9), rgba(255, 215, 0, 0.9));
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
-            transform: scale(1.02);
-            transition: all 0.3s ease;
+        /* Градиентные маски для плавных краев */
+        .widget::before,
+        .widget::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 5;
+            pointer-events: none;
         }
         
-        /* Адаптивность для мобильных устройств */
-        @media (max-width: 768px) {
-            .marquee-text {
-                font-size: 1.5rem;
-                padding: 10px 20px;
-            }
+        .widget::before {
+            left: 0;
+            background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+        }
+        
+        .widget::after {
+            right: 0;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
         }
     </style>
 </head>
 <body>
-    <div class="marquee-container">
-        <div class="marquee">
-            <span class="marquee-text">Музыку можно заказать перейдя по ссылке в моем профиле</span>
-            <span class="marquee-text">Музыку можно заказать перейдя по ссылке в моем профиле</span>
+    <div class="widget">
+        <div class="marquee-container">
+            <div class="marquee">
+                <div class="item">
+                    <img src="https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/eba3a9bb85c33e017f3648eaf88d7189~tplv-obj.webp" alt="Крипер">
+                    <span class="item-text">Крипер</span>
+                </div>
+                <div class="item">
+                    <img src="https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/a4c4dc437fd3a6632aba149769491f49.png~tplv-obj.webp" alt="Динамит">
+                    <span class="item-text">Динамит через 3 сек</span>
+                </div>
+                <div class="item">
+                    <img src="https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/e033c3f28632e233bebac1668ff66a2f.png~tplv-obj.webp" alt="Динамит">
+                    <span class="item-text">Динамит через 1 сек</span>
+                </div>
+                <div class="item">
+                    <img src="https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/20b8f61246c7b6032777bb81bf4ee055~tplv-obj.webp" alt="Лечение">
+                    <span class="item-text">Вылечить</span>
+                </div>
+                <div class="item">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMmMzZTUwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTE5IDhMMjEgMTJIMTlMMTkgMTZNNSA4TDMgMTJINUw1IDE2TTggMTlMMTIgMjFMMTYgMTlNOCA1TDEyIDNMMTYgNU0xMiAxNVY5Ii8+PHJlY3QgeD0iNyIgeT0iOSIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIi8+PC9zdmc+" alt="Звук">
+                    <span class="item-text">Звук за подписку</span>
+                </div>
+                <div class="item">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMmMzZTUwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEwIDEzYTUgNSAwIDAgMCA3LjU0LjU0TDIxIDE2YTIgMiAwIDAgMS0yIDJINGEyIDIgMCAwIDEtMi0ydi0zYTIgMiAwIDAgMSAyLTJoM2w1LTZhNyA3IDAgMCAxIDEwIDRsLTMgM002IDIxdi0yYTQgNCAwIDAgMCA0LTR2MCIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iNyIgcj0iMSIvPjxwYXRoIGQ9Ik02IDMgMTggMTgiLz48L3N2Zz4=" alt="Секретный звук">
+                    <span class="item-text">Секретный звук за репост</span>
+                </div>
+                
+                <!-- Дублируем весь набор для бесшовной анимации -->
+                <div class="item">
+                    <img src="https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/eba3a9bb85c33e017f3648eaf88d7189~tplv-obj.webp" alt="Крипер">
+                    <span class="item-text">Крипер</span>
+                </div>
+                <div class="item">
+                    <img src="https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/a4c4dc437fd3a6632aba149769491f49.png~tplv-obj.webp" alt="Динамит">
+                    <span class="item-text">Динамит через 3 сек</span>
+                </div>
+                <div class="item">
+                    <img src="https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/e033c3f28632e233bebac1668ff66a2f.png~tplv-obj.webp" alt="Динамит">
+                    <span class="item-text">Динамит через 1 сек</span>
+                </div>
+                <div class="item">
+                    <img src="https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/20b8f61246c7b6032777bb81bf4ee055~tplv-obj.webp" alt="Лечение">
+                    <span class="item-text">Вылечить</span>
+                </div>
+                <div class="item">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMmMzZTUwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTE5IDhMMjEgMTJIMTlMMTkgMTZNNSA4TDMgMTJINUw1IDE2TTggMTlMMTIgMjFMMTYgMTlNOCA1TDEyIDNMMTYgNU0xMiAxNVY5Ii8+PHJlY3QgeD0iNyIgeT0iOSIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIi8+PC9zdmc+" alt="Звук">
+                    <span class="item-text">Звук за подписку</span>
+                </div>
+                <div class="item">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMmMzZTUwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEwIDEzYTUgNSAwIDAgMCA3LjU0LjU0TDIxIDE2YTIgMiAwIDAgMS0yIDJINGEyIDIgMCAwIDEtMi0ydi0zYTIgMiAwIDAgMSAyLTJoM2w1LTZhNyA3IDAgMCAxIDEwIDRsLTMgM002IDIxdi0yYTQgNCAwIDAgMCA0LTR2MCIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iNyIgcj0iMSIvPjxwYXRoIGQ9Ik02IDMgMTggMTgiLz48L3N2Zz4=" alt="Секретный звук">
+                    <span class="item-text">Секретный звук за репост</span>
+                </div>
+            </div>
         </div>
     </div>
 </body>
